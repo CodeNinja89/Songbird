@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Command center</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="stylesheets/parallax.css">
+	<link rel="stylesheet" href="stylesheets/base.css">
+	<script>
+		$(document).ready(function() {
+			/*$.getJSON('/test/comments', function(data) {
+				var items = [];
+				$.each( data, function( key, val ) {
+					items.push( "<li>" + val + " ~ " + key + "</li>" );
+				});
+ 
+				$( "<ul/>", {
+					"class": "my-new-list",
+					html: items.join( "" )
+				}).appendTo( "#comments" );
+			}); */
+			$("#send").click(function() {
+				$.post('/test/send', {name: $("#comment").val(), comm: $("#poster").val()});
+				$("#comment").val('');
+				$("#poster").val('');
+			});					
+		});
+	</script>
+</head>
+<body>
+	<section class="module parallax parallax-1">
+		
+	</section>
+
+	<section class="module content">
+		<div class="container">
+			<h2>Welcome to MM.</h2>
+			<p>Some text for MM. Intro or something.</p>
+		</div>
+	</section>
+
+	<section class="module parallax parallax-2">
+	</section>
+
+	<section class="module content">
+		<div class="container">
+			<h2>Team I&amp;T</h2>
+			<p>A panegyric for our team. Open to suggestion.</p>
+		</div>
+	</section>
+
+	<section class="module parallax parallax-3">
+		
+	</section>
+
+	<section class="module content">
+		<div class="container">
+			<div class="recentComments">
+				<h2>Recent Comments</h2>
+				<div id="comments">
+				</div>
+			</div>
+			<h2>Comments</h2>
+			<p>
+				<textarea id="comment" rows="2" cols="100"></textarea>
+			</p>
+			<p>
+				<input type="text" placeholder="your name" id="poster" required />
+				<button id="send">Comment!</button>
+			</p>
+		</div>
+	</section>
+</body>
+</html>

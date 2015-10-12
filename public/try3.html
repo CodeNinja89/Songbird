@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Song Bird</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="javascripts/coolStuff.js"></script>
+		<script src="javascripts/wavesurfer.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two' rel='stylesheet' type='text/css'>
+		<style>
+			body {
+				font-family: 'Shadows Into Light Two', cursive;
+			}			
+			.audio {
+				margin-left: 2%;
+				margin-top: 18%;
+				position: fixed;
+				width: 95%;
+			}
+			.metadata {
+				position: absolute;
+				margin-top: 10%;
+				margin-left: 13%;
+				color: #23C5C5;
+			}
+			.metadata #tags {
+				font-size: 1.5em;
+			}
+			.buttons {
+				height: 60px;
+				width: 60px;
+				cursor: pointer;			
+			}
+			.controls {
+				margin-left: 42%;
+				margin-top: 30%;
+				position: absolute;
+			}
+			#loader {
+				margin-top: 15%;
+				margin-left: 32%;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="loader">
+			<img src="images/loader.gif" />
+		</div>
+		<div class="metadata">
+			<div id="tags"></div>
+		</div>
+		<div id="waveform" class="audio">
+			<!-- here be the waveform -->
+		</div>
+		<table class="controls" cellspacing="10">
+			<tr>
+				<td>
+					<div class="buttons" id="shuffle"><img src="images/shuffle.png" /></div>
+				</td>
+				<td>
+					<div class="buttons" id="pause"><img src="images/pause.png" /></div>
+				</td>
+			</tr>
+		</table>
+
+	</body>
+</html>
