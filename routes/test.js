@@ -1,28 +1,31 @@
 var fs = require('fs');
 var metadata = require('audio-metadata');
-var location = "D:\\users\\F55604b\\Music";
+var location = "/Users/ninja/Music/iTunes/iTunes\ Media/Music/";
+var recursive = require('recursive-readdir');
 var playlist = new Array();
 
 exports.init = function(req, res) {
 	res.sendFile('try3.html', {root: 'public'}); // must specify root (if not already in the present directory) directory where static files are stored.
-	
-	fs.readdir(location, function(err, items) {
-		for(var i = 0; i < items.length; i++) {
-			if(items[i].match(/\.mp3+$/i)) { // regex bingo!
-				//console.log(items[i]);
-				var buffer = fs.readFileSync(location + '\\' + items[i]);
+
+	recursive(location, function(err, files) {
+		// console.log(files);
+		for(var i = 0; i < files.length; i++) {
+
+			if(files[i].match(/\.mp3+$/i)) { // regex bingo!
+				// console.log("hello");
+				var buffer = fs.readFileSync(files[i]);
 				var tags = metadata.id3v2(buffer); // id3v2 bingo!
-				
+
 				var artist = tags.TPE2 || "unknown";
 				var title = tags.title || "unknown";
 				var album = tags.album || "unknown";
 				// console.log(tags);
 				playlist.push({artist: artist, title: title, album: album,
-								path: items[i]});
+								path: files[i]});
 			}
 		}
 	});
-	// console.log(playlist.length);
+	// console.log(playlist);
 };
 
 exports.shuffle = function(req, res) {
@@ -33,7 +36,6 @@ exports.shuffle = function(req, res) {
 
 exports.play = function(req, res) {
 	var song = req.param("song");
-	song = location + "\\" + song;
 	song.replace(/(\s)/, "\\ "); // escape spaces!
 	// console.log(song);
 	var stat = fs.statSync(song);

@@ -1,7 +1,7 @@
 function getSong(wavesurfer) {
 	$(".controls").hide();
 	$.get("/shuffle", function(data) {
-		var html = "Now playing <b>" + data.songs.title + "</b> by <b>" + 
+		var html = "Now playing <b>" + data.songs.title + "</b> by <b>" +
 					data.songs.artist + "</b> from <b>" + data.songs.album + "</b>";
 		$("#tags").html(html);
 		wavesurfer.load("/play?song=" + data.songs.path);
@@ -10,9 +10,6 @@ function getSong(wavesurfer) {
 			$(".controls").fadeIn();
 			wavesurfer.play();
 		});
-	});
-	wavesurfer.on('finish', function() {
-		location.reload();
 	});
 }
 
@@ -27,10 +24,13 @@ $(document).ready(function () {
 		hideScrollbar: true
 	});
 	$("#shuffle").click(function() {
-		location.reload();
+		getSong(wavesurfer);
 	});
 	$("#pause").click(function() {
 		wavesurfer.playPause();
+	});
+	wavesurfer.on('finish', function() {
+		getSong(wavesurfer);
 	});
 	getSong(wavesurfer);
 });
